@@ -62,7 +62,7 @@ module USCoreTestKit
 
           resolve_one_reference = resources.any? do |resource|
             value_found = resolve_path(resource, path)
-            next if value_found.empty?
+            next if value_found.empty? || value_found.all? { |reference| reference.reference.nil? }
 
             found_one_reference = true
 
