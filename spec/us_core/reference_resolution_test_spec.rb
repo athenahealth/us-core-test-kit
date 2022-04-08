@@ -190,5 +190,16 @@ RSpec.describe USCoreTestKit::ReferenceResolutionTest do
         end
       end
     end
+
+    context 'with display only reference' do
+      let(:resource) do
+        FHIR::Observation.new(encounter: { display: 'this is a disply only reference' })
+      end
+      let(:reference) { resource.encounter }
+
+      it 'returns true' do
+        expect(test.validate_reference_resolution(resource, reference, nil)).to be(true)
+      end
+    end
   end
 end

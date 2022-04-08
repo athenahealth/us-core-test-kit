@@ -18,7 +18,7 @@ module USCoreTestKit
     def unresolved_references_strings
       unresolved_reference_hash =
         unresolved_references.each_with_object(Hash.new { |hash, key| hash[key] = [] }) do |missing, hash|
-          hash[missing[:path]] << missing[:target_profile] 
+          hash[missing[:path]] << missing[:target_profile]
         end
       unresolved_reference_hash.map { |path, profiles| "#{path}#{"(#{profiles.join('|')})" unless profiles.first.empty?}" }
     end
@@ -41,7 +41,7 @@ module USCoreTestKit
     end
 
     def must_support_references_with_target_profile
-      # mapping array of target_profiles to array of {path, target_profile} pair 
+      # mapping array of target_profiles to array of {path, target_profile} pair
       must_support_references.map do |element_definition|
         (element_definition[:target_profiles] || ['']).map do |target_profile|
           {
@@ -77,6 +77,7 @@ module USCoreTestKit
 
     def validate_reference_resolution(resource, reference, target_profile)
       return true if resolved_references.include?(reference.reference) && target_profile.blank?
+      require 'pry'; require 'pry-byebug'; binding.pry
 
       if reference.contained?
         # if reference_id is blank it is referring to itself, so we know it exists
