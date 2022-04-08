@@ -77,7 +77,6 @@ module USCoreTestKit
 
     def validate_reference_resolution(resource, reference, target_profile)
       return true if resolved_references.include?(reference.reference) && target_profile.blank?
-      require 'pry'; require 'pry-byebug'; binding.pry
 
       if reference.contained?
         # if reference_id is blank it is referring to itself, so we know it exists
